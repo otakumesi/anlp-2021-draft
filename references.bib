@@ -1,0 +1,225 @@
+@article{devlin2018bert,
+  title={BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding},
+  author={Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  journal={arXiv preprint arXiv:1810.04805},
+  year={2018}
+}
+
+@article{caliskan2017,
+  title={Semantics derived automatically from language corpora contain human-like biases},
+  author={Caliskan, Aylin and  J. Bryson, Joanna and Narayanan, Arvind},
+  journal={American Association for the Advancement of Science},
+  year={2017}
+}
+
+@inproceedings{nangia2020crows,
+    title = "{CrowS-Pairs: A Challenge Dataset for Measuring Social Biases in Masked Language Models}",
+    author = "Nangia, Nikita  and
+      Vania, Clara  and
+      Bhalerao, Rasika  and
+      Bowman, Samuel R.",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics"
+}
+
+@article{kurita2019measuring,
+  title={Measuring Bias in Contextualized Word Representations},     
+  author={Kurita, Keita and Vyas, Nidhi and Pareek, Ayush and Black, Alan W and Tsvetkov, Yulia},  
+  journal={arXiv preprint arXiv:1906.07337},  
+  year={2019}  
+}
+
+@inproceedings{Peters:2018,
+  author={Peters, Matthew E. and  Neumann, Mark and Iyyer, Mohit and Gardner, Matt and Clark, Christopher and Lee, Kenton and Zettlemoyer, Luke},
+  title={Deep contextualized word representations},
+  booktitle={Proc. of NAACL},
+  year={2018}
+}
+
+@article{joshi2019spanbert,
+  title={{SpanBERT}: Improving Pre-training by Representing and Predicting Spans},
+  author={Mandar Joshi and Danqi Chen and Yinhan Liu and Daniel S. Weld and Luke Zettlemoyer and Omer Levy},
+  journal={arXiv preprint arXiv:1907.10529},
+  year={2019}
+}
+
+@inproceedings{nangia2020crows,
+    title = "{CrowS-Pairs: A Challenge Dataset for Measuring Social Biases in Masked Language Models}",
+    author = "Nangia, Nikita  and
+      Vania, Clara  and
+      Bhalerao, Rasika  and
+      Bowman, Samuel R.",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics"
+}
+
+@InProceedings{bolukbasi2016man,
+author = {Bolukbasi, Tolga and Chang, Kai-Wei and Zou, James and Saligrama, Venkatesh and Kalai, Adam Tauman},
+title = {Man is to Computer Programmer as Woman is to Homemaker? Debiasing Word Embeddings},
+booktitle = {NIPS},
+year = {2016},
+month = {June},
+abstract = {Machine learning algorithms are optimized to model statistical properties of the training data. If the input data reflects stereotypes and biases of the broader society, then the output of the learning algorithm also captures these stereotypes. In this paper, we initiate the study of gender stereotypes in \em word embedding, a popular framework to represent text data. As their use becomes increasingly common, applications can inadvertently amplify unwanted stereotypes. We show across multiple datasets that the embeddings contain significant gender stereotypes, especially with regard to professions. We created a novel gender analogy task and combined it with crowdsourcing to systematically quantify the gender bias in a given embedding. We developed an efficient algorithm that reduces gender stereotype using just a handful of training examples while preserving the useful geometric properties of the embedding. We evaluated our algorithm on several metrics. While we focus on male/female stereotypes, our framework may be applicable to other types of embedding biases.},
+url = {https://www.microsoft.com/en-us/research/publication/quantifying-reducing-stereotypes-word-embeddings/},
+edition = {NIPS},
+}
+
+@inproceedings{kaneko-bollegala-2019-gender,
+    title = "Gender-preserving Debiasing for Pre-trained Word Embeddings",
+    author = "Kaneko, Masahiro  and
+      Bollegala, Danushka",
+    booktitle = "Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/P19-1160",
+    doi = "10.18653/v1/P19-1160",
+    pages = "1641--1650",
+    abstract = "Word embeddings learnt from massive text collections have demonstrated significant levels of discriminative biases such as gender, racial or ethnic biases, which in turn bias the down-stream NLP applications that use those word embeddings. Taking gender-bias as a working example, we propose a debiasing method that preserves non-discriminative gender-related information, while removing stereotypical discriminative gender biases from pre-trained word embeddings. Specifically, we consider four types of information: \textit{feminine}, \textit{masculine}, \textit{gender-neutral} and \textit{stereotypical}, which represent the relationship between gender vs. bias, and propose a debiasing method that (a) preserves the gender-related information in feminine and masculine words, (b) preserves the neutrality in gender-neutral words, and (c) removes the biases from stereotypical words. Experimental results on several previously proposed benchmark datasets show that our proposed method can debias pre-trained word embeddings better than existing SoTA methods proposed for debiasing word embeddings while preserving gender-related but non-discriminative information.",
+}
+
+@inproceedings{zhao-etal-2018-gender,
+    title = "Gender Bias in Coreference Resolution: Evaluation and Debiasing Methods",
+    author = "Zhao, Jieyu  and
+      Wang, Tianlu  and
+      Yatskar, Mark  and
+      Ordonez, Vicente  and
+      Chang, Kai-Wei",
+    booktitle = "Proceedings of the 2018 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers)",
+    month = jun,
+    year = "2018",
+    address = "New Orleans, Louisiana",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/N18-2003",
+    doi = "10.18653/v1/N18-2003",
+    pages = "15--20",
+    abstract = "In this paper, we introduce a new benchmark for co-reference resolution focused on gender bias, WinoBias. Our corpus contains Winograd-schema style sentences with entities corresponding to people referred by their occupation (e.g. the nurse, the doctor, the carpenter). We demonstrate that a rule-based, a feature-rich, and a neural coreference system all link gendered pronouns to pro-stereotypical entities with higher accuracy than anti-stereotypical entities, by an average difference of 21.1 in F1 score. Finally, we demonstrate a data-augmentation approach that, in combination with existing word-embedding debiasing techniques, removes the bias demonstrated by these systems in WinoBias without significantly affecting their performance on existing datasets.",
+}
+
+@misc{nadeem2020stereoset,
+    title={StereoSet: Measuring stereotypical bias in pretrained language models},
+    author={Moin Nadeem and Anna Bethke and Siva Reddy},
+    year={2020},
+    eprint={2004.09456},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
+
+@inproceedings{sap2020socialbiasframes,
+   title={Social Bias Frames: Reasoning about Social and Power Implications of Language},
+   author={Sap, Maarten and Gabriel, Saadia and Qin, Lianhui and Jurafsky, Dan and Smith, Noah A and Choi, Yejin},
+   year={2020},
+   booktitle={ACL},
+}
+
+@inproceedings{lucas2018,
+title	= {Measuring and Mitigating Unintended Bias in Text Classification},
+author	= {Lucas Dixon and John Li and Jeffrey Sorensen and Nithum Thain and Lucy Vasserman},
+year	= {2018}
+}
+
+@inproceedings{pennington2014glove,
+  author = {Jeffrey Pennington and Richard Socher and Christopher D. Manning},
+  booktitle = {Empirical Methods in Natural Language Processing (EMNLP)},
+  title = {GloVe: Global Vectors for Word Representation},
+  year = {2014},
+  pages = {1532--1543},
+  url = {http://www.aclweb.org/anthology/D14-1162},
+}
+
+@MISC{Greenwald98measuringindividual,
+    author = {Anthony G. Greenwald and Debbie E. McGhee and et al.},
+    title = {Measuring individual differences in implicit cognition: The implicit association test},
+    year = {1998}
+}
+
+@inproceedings{salazar-etal-2020-masked,
+    title = "Masked Language Model Scoring",
+    author = "Salazar, Julian  and
+      Liang, Davis  and
+      Nguyen, Toan Q.  and
+      Kirchhoff, Katrin",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.240",
+    doi = "10.18653/v1/2020.acl-main.240",
+    pages = "2699--2712",
+    abstract = "Pretrained masked language models (MLMs) require finetuning for most NLP tasks. Instead, we evaluate MLMs out of the box via their pseudo-log-likelihood scores (PLLs), which are computed by masking tokens one by one. We show that PLLs outperform scores from autoregressive language models like GPT-2 in a variety of tasks. By rescoring ASR and NMT hypotheses, RoBERTa reduces an end-to-end LibriSpeech model{'}s WER by 30{\%} relative and adds up to +1.7 BLEU on state-of-the-art baselines for low-resource translation pairs, with further gains from domain adaptation. We attribute this success to PLL{'}s unsupervised expression of linguistic acceptability without a left-to-right bias, greatly improving on scores from GPT-2 (+10 points on island effects, NPI licensing in BLiMP). One can finetune MLMs to give scores without masking, enabling computation in a single inference pass. In all, PLLs and their associated pseudo-perplexities (PPPLs) enable plug-and-play use of the growing number of pretrained MLMs; e.g., we use a single cross-lingual model to rescore translations in multiple languages. We release our library for language model scoring at https://github.com/awslabs/mlm-scoring.",
+}
+
+@inproceedings{may-etal-2019-measuring,
+    title = "On Measuring Social Biases in Sentence Encoders",
+    author = "May, Chandler  and
+      Wang, Alex  and
+      Bordia, Shikha  and
+      Bowman, Samuel R.  and
+      Rudinger, Rachel",
+    booktitle = "Proceedings of the 2019 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+    month = jun,
+    year = "2019",
+    address = "Minneapolis, Minnesota",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/N19-1063",
+    doi = "10.18653/v1/N19-1063",
+    pages = "622--628",
+    abstract = "The Word Embedding Association Test shows that GloVe and word2vec word embeddings exhibit human-like implicit biases based on gender, race, and other social constructs (Caliskan et al., 2017). Meanwhile, research on learning reusable text representations has begun to explore sentence-level texts, with some sentence encoders seeing enthusiastic adoption. Accordingly, we extend the Word Embedding Association Test to measure bias in sentence encoders. We then test several sentence encoders, including state-of-the-art methods such as ELMo and BERT, for the social biases studied in prior work and two important biases that are difficult or impossible to test at the word level. We observe mixed results including suspicious patterns of sensitivity that suggest the test{'}s assumptions may not hold in general. We conclude by proposing directions for future work on measuring bias in sentence encoders.",
+}
+
+@inproceedings{liang-etal-2020-towards,
+    title = "Towards Debiasing Sentence Representations",
+    author = "Liang, Paul Pu  and
+      Li, Irene Mengze  and
+      Zheng, Emily  and
+      Lim, Yao Chong  and
+      Salakhutdinov, Ruslan  and
+      Morency, Louis-Philippe",
+    booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.acl-main.488",
+    doi = "10.18653/v1/2020.acl-main.488",
+    pages = "5502--5515",
+    abstract = "As natural language processing methods are increasingly deployed in real-world scenarios such as healthcare, legal systems, and social science, it becomes necessary to recognize the role they potentially play in shaping social biases and stereotypes. Previous work has revealed the presence of social biases in widely used word embeddings involving gender, race, religion, and other social constructs. While some methods were proposed to debias these word-level embeddings, there is a need to perform debiasing at the sentence-level given the recent shift towards new contextualized sentence representations such as ELMo and BERT. In this paper, we investigate the presence of social biases in sentence-level representations and propose a new method, Sent-Debias, to reduce these biases. We show that Sent-Debias is effective in removing biases, and at the same time, preserves performance on sentence-level downstream tasks such as sentiment analysis, linguistic acceptability, and natural language understanding. We hope that our work will inspire future research on characterizing and removing social biases from widely adopted sentence representations for fairer NLP.",
+}
+
+@inproceedings{zhao-etal-2018-gender,
+    title = "Gender Bias in Coreference Resolution: Evaluation and Debiasing Methods",
+    author = "Zhao, Jieyu  and
+      Wang, Tianlu  and
+      Yatskar, Mark  and
+      Ordonez, Vicente  and
+      Chang, Kai-Wei",
+    booktitle = "Proceedings of the 2018 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 2 (Short Papers)",
+    month = jun,
+    year = "2018",
+    address = "New Orleans, Louisiana",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/N18-2003",
+    doi = "10.18653/v1/N18-2003",
+    pages = "15--20",
+    abstract = "In this paper, we introduce a new benchmark for co-reference resolution focused on gender bias, WinoBias. Our corpus contains Winograd-schema style sentences with entities corresponding to people referred by their occupation (e.g. the nurse, the doctor, the carpenter). We demonstrate that a rule-based, a feature-rich, and a neural coreference system all link gendered pronouns to pro-stereotypical entities with higher accuracy than anti-stereotypical entities, by an average difference of 21.1 in F1 score. Finally, we demonstrate a data-augmentation approach that, in combination with existing word-embedding debiasing techniques, removes the bias demonstrated by these systems in WinoBias without significantly affecting their performance on existing datasets.",
+}
+
+@inproceedings{wolf-etal-2020-transformers,
+    title = "Transformers: State-of-the-Art Natural Language Processing",
+    author = "Thomas Wolf and Lysandre Debut and Victor Sanh and Julien Chaumond and Clement Delangue and Anthony Moi and Pierric Cistac and Tim Rault and Rémi Louf and Morgan Funtowicz and Joe Davison and Sam Shleifer and Patrick von Platen and Clara Ma and Yacine Jernite and Julien Plu and Canwen Xu and Teven Le Scao and Sylvain Gugger and Mariama Drame and Quentin Lhoest and Alexander M. Rush",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = oct,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-demos.6",
+    pages = "38--45"
+}
