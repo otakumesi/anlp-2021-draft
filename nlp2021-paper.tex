@@ -18,6 +18,7 @@
 \usepackage{authblk}
 \usepackage{multirow}
 \usepackage{here}
+\usepackage{threeparttable}
 
 %% option 不要な場合はコメントアウト
 \usepackage{bxjalipsum}       % ダミーテキスト
@@ -67,17 +68,17 @@ Bolukbasiら\cite{bolukbasi2016man}の研究をはじめとして,近年には�
 近年の自然言語処理において、単語埋め込みや言語モデルのBiasの存在を可視化および除去する研究が増えてきている。
 Caliskanら\cite{caliskan2017}は,認知心理学において人間の潜在的態度を計測する手法であるImplicit Association Test (IAT)\cite{Greenwald98measuringindividual}をもとに,コサイン距離を用いて単語埋め込みが持つ潜在的なBiasを計測するWord Embedding Association Test (WEAT)を考案した.さらに, WEATを用いてGlove\cite{pennington2014glove}の性別や人種が表現される単語群の埋め込み表現の間に,印象を表す単語群の表現などとの距離を計測し,事前学習された埋め込み表現に性別や人種間で偏りが生じていることを示した.このWEATは,単語埋め込みだけを対象にしたものであるが, Sentence Encoderに拡張した研究\cite{may-etal-2019-measuring}やマスク言語モデルに拡張した研究\cite{kurita2019measuring}などが存在している.
 
-Nangiaら\cite{nangia2020crows}はBiasを数量化するためにstereotypeとanti-stereotypeな二組の文から構成されるデータセットであるCrowS-Pairsを提案し, Pseudo Log Likelihood Masked Language Model (MLM) Scoring\cite{salazar-etal-2020-masked}を用いて擬似的に文の尤度を評価し,  stereotypeとanti-stereotypeな文のスコアを比較することでマスク言語モデルのBiasの計測し, BERTなどにBiasが存在していることを示した.
+Nangiaら\cite{nangia2020crows}はBiasを数量化するためにstereotypeとanti-stereotypeな二組の文から構成されるデータセットであるCrowS-Pairsを提案し, 擬似対数尤度マスク言語モデルスコア\cite{salazar-etal-2020-masked}を用いて擬似的に文の尤度を評価し,  stereotypeとanti-stereotypeな文のスコアを比較することでマスク言語モデルのBiasの計測し, BERTなどにBiasが存在していることを示した.
 Bolukbasiら\cite{bolukbasi2016man}は,単語埋め込みが$\overrightarrow{\mathrm{man}}-\overrightarrow{\mathrm{woman}} \approx \overrightarrow{\mathrm{computer\ programmer}}-\overrightarrow{\mathrm{homemaker}}$のようなコーパスに潜む暗黙的なBiasを表現してしまっているアナロジーが存在することを示し,それらを除去する手法を提案した.
 また, Liangら\cite{liang-etal-2020-towards}は, Bolukbasiらの研究を元に主成分分析を用いてElmoやBERTなどの言語モデルの表現からBiasの部分空間を特定し,それを元の表現から取り除くことでDebiasを実現する手法を提案している.
 
 \subsection{文表現の摂動正規化損失}
 
-\subsection{Pseudo Log Likelihood MLM Scoring}
-Nangiaら\cite{nangia2020crows}はマスク言語モデルのBiasを計測するために用いた Pseudo Log Likelihood MLM Scoring \cite{salazar-etal-2020-masked}をもちいて,言語モデルに存在するBiasを計測する手法を提案した.
+\subsection{擬似対数尤度マスク言語モデルスコア}
+Nangiaら\cite{nangia2020crows}はマスク言語モデルのBiasを計測するために用いた 擬似対数尤度マスク言語モデルスコア\cite{salazar-etal-2020-masked}をもちいて,言語モデルに存在するBiasを計測する手法を提案した.
 本指標は,一部のトークンのみが異なる文のペアが与えられることを前提とし,二つの文それぞれがUnmodifiedトークンとModifiedトークンという部分に分けられる. Unmodifiedトークンは,文のペアの間で同じトークンである部分を指す.一方で, Modifiedトークンは文のペアの間で異なるトークンの部分を指す.以降では,それぞれのトークンの集合を$U = \{u_0, ..., u_l\}$と$M = \{m_0, ..., m_n\}$とおく.
 
-同実験で提案されたデータセットであるCrowS-Pairsから具体的な例を示す. `Native Americans are lazy and get handouts.`と`Whites are lazy and get handouts.`のペアが与えられると, `are lazy and get handouts.`が両方のペアで$U$に属し, `Native Americans`と`Whites`はそれぞれの文で$M$に属する.
+同実験で提案されたデータセットであるCrowS-Pairsから具体的な例を示す. `\emph{Native Americans} are lazy and get handouts.`と`\emph{Whites} are lazy and get handouts.`のペアが与えられると, `are lazy and get handouts.`が両方のペアで$U$に属し, `Native Americans`と`Whites`はそれぞれの文で$M$に属する.
 $T$をコーパスより与えられる文に属するトークンの集合とし, $T = (U \cup M)$とし, $u_i$を$U$における$i$番のトークンと考えると,本指標は$M$とある$u_i$を除くすべての$U$が与えられた時の$u_i$の条件付き対数尤度の合計として算出される.
 
 \begin{equation}
@@ -100,10 +101,10 @@ $T$をコーパスより与えられる文に属するトークンの集合と�
 本研究ではこの累積Biasを用いて,言語モデルのBiasの数量化をし,評価をおこなった.
 
 \subsection{損失関数}
-言語モデルが学習に使われたコーパスの語彙の頻度によるBiasを反映していると考えると,その頻度を近づけることによってBiasを軽減することができるのではないかと考えた.
+言語モデルが学習に使われたコーパスの語彙の頻度によるBiasを反映していると考えると,Social Bias間のその頻度の差を近づけることでBiasを軽減することができるのではないかと考えた.
 
 そこで,マスク言語モデルの事前学習タスクであるマスク予測に使われるHeadの出力が,入力トークンの予測スコアとなっていることに着目し,文のペアの出力結果のうちUnmodifiedトークンのスコアが近づくようにfine-tuningをすることBiasを軽減することを試みた.
-$T^A$と$T^S$は,それぞれマスク言語モデルのマスク予測タスクのHeadの出力結果とすると,本手法を次の損失関数として提案した.
+$T^A$と$T^S$は,それぞれマスク言語モデルのマスク予測タスクのHeadの出力結果とすると,本手法を以下のような損失関数で実現する.
 
 \begin{equation}
 \label{eq:loss_function}
@@ -175,8 +176,7 @@ fine-tuning前後でBERTは同じモデル(base, uncased)を使い,また学習�
 GLUEにおけるfine-tuningの学習の最適化にはAdamを用いており,ハイパーパラメータはDevlinら\cite{devlin2018bert}の実験をもとに学習率$\alpha = 4e^{-5}$, $\beta_1 = 0.9$, $\beta_2 = 0.999$とした.
 また,エポック数は3で,バッチサイズは32としている.
 
-表\ref{tab:results_glue}に,モデルごとのGLUEタスクのスコアを示す.
-Bias Fine-tuningの前後でGLUEのスコアがそれほど変化しておらず,性能の劣化が見られないことが確認できた.
+表\ref{tab:results_glue}に,モデルごとのGLUEタスクのスコアを示す.このスコアの結果をタスクごとにWelchのt検定を有意水準を0.01で検定したところ, RTEを除いて有意差が確認されなかった.そのため, Bias Fine-tuningの前後でGLUEのスコアがそれほど変化しておらず,性能の劣化が見られないことが確認できた.
 
 \begin{table}[h]
 \centering
@@ -185,31 +185,31 @@ Bias Fine-tuningの前後でGLUEのスコアがそれほど変化しておらず
 \hline
 データ & 指標 &  BERT & fine-tuned BERT \\
 \hline
-CoLA & Matthew Corr & 0.573 &  0.598 \\
+CoLA & Matthew Corr & 0.573 & \textbf{0.598} \tnote{*} \\
 \hline
-MNLI & Acc & 0.842 &  0.840  \\
+MNLI & Acc & \textbf{0.842} \tnote{*} &  0.840  \\
 \hline
-\multirow{2}{*}{MRPC} & Acc & 0.863 &  0.860  \\
- & F1 & 0.902 & 0.905 \\
+\multirow{2}{*}{MRPC} & Acc & \textbf{0.863} \tnote{*} &  0.860  \\
+ & F1 & 0.902 & \textbf{0.905} \tnote{*} \\
 \hline
-QNLI & Acc & 0.914 & 0.912 \\
+QNLI & Acc & \textbf{0.914}  \tnote{*} & 0.912 \\
 \hline
-\multirow{2}{*}{QQP} & Acc & 0.913 & 0.911 \\
- & F1 & 0.882 & 0.881 \\
+\multirow{2}{*}{QQP} & Acc & \textbf{0.913}  \tnote{*} & 0.911 \\
+ & F1 & \textbf{0.882} & 0.881 \\
 \hline
-RTE & Acc & 0.671 & 0.704 \\
+RTE & Acc & 0.671 & \textbf{0.704} \tnote{*} \\
 \hline
 SST-2 & Acc & 0.922 & 0.922 \\
 \hline
-\multirow{2}{*}{STS-B} & Pearson Corr & 0.886 & 0.903\\
- & Spearman Corr & 0.885 & 0.899\\
+\multirow{2}{*}{STS-B} & Pearson Corr & 0.886 & \textbf{0.903}\\
+ & Spearman Corr & 0.885 & \textbf{0.899} \\
 \hline
-WNLI & Acc & 0.549 & 0.563 \\
+WNLI & Acc & 0.549 & \textbf{0.563} \tnote{*} \\
 \hline
 \end{tabular}
 \caption{GLUEタスクの評価セットにおける結果}
 \end{table}
-
+	
 \begin{figure*}[h]
 \centering
 \includegraphics[width=15cm]{hist_score_diffrerence.png}
@@ -221,17 +221,16 @@ WNLI & Acc & 0.549 & 0.563 \\
 \centering
 \includegraphics[width=15cm]{hist_transformed_pseudo_log_likelihood.png}
 \label{fig:hist_transformed_log_likelihoods}
-\caption{Pseudo Log Likelihood Scoreの分布（対数変換後）}
+\caption{擬似対数尤度スコアの分布（対数変換後）}
 \end{figure*}
 
 
 \section{議論}
 表\ref{tab:results_bias}の結果をより詳細に分析するため,CrowS-PairsにおけるBiasスコアを合計せずにヒストグラムに表したものを図\ref{fig:hist_bias}に示す. binは5ずつ刻まれており,0に近づくほどBiasが少ないと考えられる. fine-tune前後のヒストグラムを比べると,よりBiasが小さい方に頻度が増えていることが確認できる.つまり, stereotypeとanti-stereotypeな文のトークンの対数尤度が近づいており,対数尤度を基準としたBiasを軽減できてると考えられる.
-また,個々のstereotypeおよびanti-stereotypeの文それぞれのPseudo Log Likelihood ScoreをヒストグラムにしたものをAppendixに図\ref{fig:hist_log_likelihoods}に示した.これらのスコアが負の対数尤度から由来していることとこのヒストグラムの形が対数正規分布に近いことから,正の数へと変換し対数をとったものが図\ref{fig:hist_transformed_log_likelihoods}で,形が正規分布のようになっていることがわかる.そこで,それぞれのモデルごとにstereotypeのスコアとanti-stereotypeのスコアが同じ分布であるという仮説を対応のあるt検定で確認した.その結果が表\ref{tab:t_bias_scores}である.有意水準を0.1として,この結果を読み取るとfine-tuningをする前のBERTがstereotypeとanti-stereotypeのスコアが有意に異なる分布をしていると考えられ,一方でBias Fine-tuning後では有意差がないため,それぞれの文のスコアが似た分布に近づいていると考えられる.
+また,個々のstereotypeおよびanti-stereotypeの文それぞれの擬似対数尤度マスク言語モデルスコアをヒストグラムにしたものをAppendixに図\ref{fig:hist_log_likelihoods}に示した.これらのスコアが負の対数尤度から由来していることとこのヒストグラムの形が対数正規分布に近いことから,正の数へと変換し対数をとったものが図\ref{fig:hist_transformed_log_likelihoods}で,形が正規分布のようになっていることがわかる.そこで,それぞれのモデルごとにstereotypeのスコアとanti-stereotypeのスコアが同じ分布であるという仮説を対応のあるt検定で確認した.その結果が表\ref{tab:t_bias_scores}である.有意水準を0.1として,この結果を読み取るとfine-tuningをする前のBERTがstereotypeとanti-stereotypeのスコアが有意に異なる分布をしていると考えられ,一方でBias Fine-tuning後では有意差がないため,それぞれの文のスコアが似た分布に近づいていると考えられる.
 
 \begin{table}[h]
 \centering
-\caption{Pseudo Log Likelihoodの検定結果}
 \label{tab:t_bias_scores}
 \begin{tabular}{lcc}
 \hline
@@ -240,6 +239,7 @@ WNLI & Acc & 0.549 & 0.563 \\
 p-value & $3.72e^{-07}$ &  0.214 \\
 \hline
 \end{tabular}
+\caption{擬似対数尤度スコアの検定結果}
 \end{table}
 
 \section{おわりに}
@@ -269,7 +269,7 @@ p-value & $3.72e^{-07}$ &  0.214 \\
 
 \begin{figure*}[h]
 \centering
-\caption{Pseudo Log Likelihood Scoreの分布}
+\caption{擬似対数尤度スコアの分布}
 \includegraphics[width=15cm]{hist_pseudo_log_likelihood.png}
 \label{fig:hist_log_likelihoods}
 \end{figure*}
