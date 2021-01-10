@@ -82,8 +82,8 @@ Nangiaら\cite{nangia2020crows}はマスク言語モデルのBiasを計測する
 $T$をコーパスより与えられる文に属するトークンの集合とし, $T = (U \cup M)$とし, $u_i$を$U$における$i$番のトークンと考えると,本指標は$M$とある$u_i$を除くすべての$U$が与えられた時の$u_i$の条件付き対数尤度の合計として算出される.
 
 \begin{equation}
-\label{eq:pseudo_log_likelihood}
 \mathrm{score}(T) = \sum_{i=0}^{|T|}{\log{P(u_i \in U | U \setminus \{u_i\}, M, \theta)}}
+\label{eq:pseudo_log_likelihood}
 \end{equation}
 
 これは, 擬似的な負の対数尤度の合計であることから,与えられたペアのスコアを比較することで,より高いスコアを持つ文の$M$の方が言語モデル内で尤もらしいと扱われていると判断できる.
@@ -94,8 +94,8 @@ $T$をコーパスより与えられる文に属するトークンの集合と�
 累積バイアスは, $T^S$をstereotypeな文とし, $T^A$をanti-stereotypeな文としたとき,そのペアの集合を$C = \{(T_1^S, T_1^A), ... , (T_n^S, T_n^A)\}$とおくと次の式で表される.
 
 \begin{equation}
-\label{eq:bias_score}
 \mathrm{Accumulate\ Bias}(C) = \sum_{i=1}^{|C|}|\mathrm{score}(T_i^S) - \mathrm{score}(T_i^A)|
+\label{eq:bias_score}
 \end{equation}
 
 本研究ではこの累積Biasを用いて,言語モデルのBiasの数量化をし,評価をおこなった.
@@ -115,7 +115,6 @@ $N = \max \{|T^A|, |T^S|\}$とし, $KL$はKullback–Leibler divergenceを指す
 
 \begin{table*}[h]
 \centering
-\label{tab:datasets}
 \begin{tabular}{lcll}
 \hline
 データセット名 & ペア数 & 例文(Stereotype / Anti-Stereotype) \\
@@ -131,6 +130,7 @@ $N = \max \{|T^A|, |T^S|\}$とし, $KL$はKullback–Leibler divergenceを指す
 \hline
 \end{tabular}
 \caption{学習・評価に利用したデータセット}
+\label{tab:datasets}
 \end{table*}
 
 \section{実験}
@@ -154,7 +154,6 @@ Bias Fine-tuningをとおして, BERTから計算される累積Biasが減少し
 
 \begin{table}[h]
 \centering
-\label{tab:results_bias}
 \begin{tabular}{lccc}
 \hline
  &  BERT & fine-tuned BERT \\
@@ -165,6 +164,7 @@ WinoBias-knowledge & 1.64 & 0.82 \\
 \hline
 \end{tabular}
 \caption{Fine-tuning前後の累積Biasスコア}
+\label{tab:results_bias}
 \end{table}
 
 \subsection{言語理解タスクによる性能確認}
@@ -176,7 +176,7 @@ fine-tuning前後でBERTは同じモデル(base, uncased)を使い,また学習�
 GLUEにおけるfine-tuningの学習の最適化にはAdamを用いており,ハイパーパラメータはDevlinら\cite{devlin2018bert}の実験をもとに学習率$\alpha = 4e^{-5}$, $\beta_1 = 0.9$, $\beta_2 = 0.999$とした.
 また,エポック数は3で,バッチサイズは32としている.
 
-表\ref{tab:results_glue}に,モデルごとのGLUEタスクのスコアを示す.このスコアの結果をタスクごとにWelchのt検定を有意水準を0.01で検定したところ, RTEを除いて有意差が確認されなかった.そのため, Bias Fine-tuningの前後でGLUEのスコアがそれほど変化しておらず,性能の劣化が見られないことが確認できた.
+表\ref{tab:results_glue}に,モデルごとのGLUEタスクのスコアを示す.このスコアの結果をタスクごとにWelchのt検定を用いて有意水準を0.01で検定したところ, RTEを除いて有意差が確認されなかった.そのため, Bias Fine-tuningの前後でGLUEのスコアがそれほど変化しておらず,性能の劣化が見られないことが確認できた.
 
 \begin{table}[h]
 \centering
@@ -213,25 +213,24 @@ WNLI & Acc & 0.549 & \textbf{0.563} \tnote{*} \\
 \begin{figure*}[h]
 \centering
 \includegraphics[width=15cm]{hist_score_diffrerence.png}
-\label{fig:hist_bias}
 \caption{Biasスコアの分布}
+\label{fig:hist_bias}
 \end{figure*}
 
 \begin{figure*}[h]
 \centering
-\includegraphics[width=15cm]{hist_transformed_pseudo_log_likelihood.png}
-\label{fig:hist_transformed_log_likelihoods}
-\caption{擬似対数尤度スコアの分布（対数変換後）}
+\includegraphics[width=15cm]{hist_pseudo_log_likelihood.png}
+\caption{擬似対数尤度スコアの分布}
+\label{fig:hist_log_likelihoods}
 \end{figure*}
 
 
 \section{議論}
 表\ref{tab:results_bias}の結果をより詳細に分析するため,CrowS-PairsにおけるBiasスコアを合計せずにヒストグラムに表したものを図\ref{fig:hist_bias}に示す. binは5ずつ刻まれており,0に近づくほどBiasが少ないと考えられる. fine-tune前後のヒストグラムを比べると,よりBiasが小さい方に頻度が増えていることが確認できる.つまり, stereotypeとanti-stereotypeな文のトークンの対数尤度が近づいており,対数尤度を基準としたBiasを軽減できてると考えられる.
-また,個々のstereotypeおよびanti-stereotypeの文それぞれの擬似対数尤度マスク言語モデルスコアをヒストグラムにしたものをAppendixに図\ref{fig:hist_log_likelihoods}に示した.これらのスコアが負の対数尤度から由来していることとこのヒストグラムの形が対数正規分布に近いことから,正の数へと変換し対数をとったものが図\ref{fig:hist_transformed_log_likelihoods}で,形が正規分布のようになっていることがわかる.そこで,それぞれのモデルごとにstereotypeのスコアとanti-stereotypeのスコアが同じ分布であるという仮説を対応のあるt検定で確認した.その結果が表\ref{tab:t_bias_scores}である.有意水準を0.1として,この結果を読み取るとfine-tuningをする前のBERTがstereotypeとanti-stereotypeのスコアが有意に異なる分布をしていると考えられ,一方でBias Fine-tuning後では有意差がないため,それぞれの文のスコアが似た分布に近づいていると考えられる.
+また,個々のstereotypeおよびanti-stereotypeの文それぞれの擬似対数尤度マスク言語モデルスコアをヒストグラムにしたものが図\ref{fig:hist_log_likelihoods}である。このヒストグラムの形が対数正規分布に近かったことから,負の対数尤度から絶対値を取ることでスコアを正の数に変えて対数変換をしたところ、正規分布のような形となった.そこで,それぞれのモデルごとにstereotypeのスコアとanti-stereotypeのスコアが同じ分布であるという仮説を対応のあるt検定で確認した.その結果が表\ref{tab:t_bias_scores}である.有意水準を0.1として,この結果を読み取るとfine-tuningをする前のBERTがstereotypeとanti-stereotypeのスコアが有意に異なる分布をしていると考えられ,一方でBias Fine-tuning後では有意差がないため,それぞれの文のスコアが似た分布に近づいていると考えられる.
 
 \begin{table}[h]
 \centering
-\label{tab:t_bias_scores}
 \begin{tabular}{lcc}
 \hline
  &  BERT & Fine-tuned BERT \\
@@ -240,6 +239,7 @@ p-value & $3.72e^{-07}$ &  0.214 \\
 \hline
 \end{tabular}
 \caption{擬似対数尤度スコアの検定結果}
+\label{tab:t_bias_scores}
 \end{table}
 
 \section{おわりに}
@@ -255,23 +255,5 @@ p-value & $3.72e^{-07}$ &  0.214 \\
 % 参考文献
 \bibliographystyle{plain}
 \bibliography{references}
-
-
-% 付録(Appendix)
-% 付録を付けない場合は、以下\end{document}以外を全てをコメントアウトする．
-% 本文、参考文献に続けて作成する場合は、必ず \clearpage して新たなページとする
-\clearpage
-% 付録は別ツールで作成して、後で本文PDFに追加する方式でもよい
-\appendix
-% ここ以降はフォーマットを自由に変更可能
-\onecolumn
-\section{Appendix}
-
-\begin{figure*}[h]
-\centering
-\caption{擬似対数尤度スコアの分布}
-\includegraphics[width=15cm]{hist_pseudo_log_likelihood.png}
-\label{fig:hist_log_likelihoods}
-\end{figure*}
 
 \end{document}
